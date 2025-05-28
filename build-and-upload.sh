@@ -213,4 +213,17 @@ echo "2. Use the Terraform Runner to deploy this project"
 echo "3. Check logs at: $LOG_FILE"
 echo "=================================="
 
+
+CURL_PAYLOAD=$(cat <<EOF
+{
+    "project_name": "$PROJECT_NAME",
+    "command": "apply"
+}
+EOF
+)
+
+curl --location '13.230.153.20:8080/run-terraform' \
+--header 'Content-Type: application/json' \
+--data "$CURL_PAYLOAD"
+
 exit 0
